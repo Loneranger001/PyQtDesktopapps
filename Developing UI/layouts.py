@@ -1,5 +1,5 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QGroupBox, QHBoxLayout, QVBoxLayout
 from PyQt5 import QtGui
 from PyQt5 import QtCore
 
@@ -8,12 +8,15 @@ from PyQt5 import QtCore
 class Window(QMainWindow):
     def __init__(self):
         super(Window, self).__init__()
-        self.title = 'UDA Upload tool'
+        self.title = 'PyQt Layout Demo'
         self.left = 50
         self.top = 50
         self.width = 640
         self.height = 400
         self.icon = 'upload.png'
+        self.footbal = 'Football'
+        self.cricket = 'Cricket'
+        self.tennis = 'Tennis'
         self.initWindow()
 
     def initWindow(self):
@@ -21,31 +24,59 @@ class Window(QMainWindow):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
         # create push button
-        self.pushButtons()
+        self.create_layout()
         # show the window
         self.show()
 
-    def pushButtons(self):
-        button = QPushButton('Upload', self)
-        button1 = QPushButton('Close Application',self)
-        button1.setGeometry(400,80,200,30)
-        button.setGeometry(400, 40, 200, 30)
-        # button1.move(500, 80)
-        button1.setIcon(QtGui.QIcon('close.png'))
-        # move the button to position
-        # button.move(500, 50)
-        button.setIcon(QtGui.QIcon(self.icon))
-        # button.setToolTip('This is for UDA upload')
-        # connect the slot/function with clicking of the button
-        button.clicked.connect(self.ClickMe)
-        button1.clicked.connect(self.closewindow)
+    def create_button(self):
+        # button1 = QPushButton('Football', self)
+        # button1.setGeometry(100, 100, 150, 50)
+        # button1.setIcon(QtGui.QIcon('football-icon-png.png'))
+        #
+        # button2 = QPushButton('Cricket', self)
+        # button2.setGeometry(100, 100, 150, 50)
+        # button2.setIcon(QtGui.QIcon('cricket.png'))
+        #
+        # button3 = QPushButton('Tennis', self)
+        # button3.setGeometry(100, 100, 150, 50)
+        # button3.setIcon(QtGui.QIcon('tennis.png'))
 
-    def ClickMe(self):
+
+        # button1.clicked.connect(self.click_me)
+        # button2.clicked.connect(self.click_me)
+        # button2.clicked.connect(self.click_me)
+        None
+
+    def click_me(self):
         print('Button has been clicked!')
 
     def closewindow(self):
         print('Window will be closed!!')
         sys.exit()
+
+    def create_layout(self):
+        self.groupbox = QGroupBox('What is your favorite sport?')
+        hboxlayout = QHBoxLayout()
+
+        button1 = QPushButton('Football', self)
+        button1.setGeometry(100, 100, 150, 50)
+        button1.setIcon(QtGui.QIcon('football-icon-png.png'))
+
+        button2 = QPushButton('Cricket', self)
+        button2.setGeometry(100, 100, 150, 50)
+        button2.setIcon(QtGui.QIcon('cricket.png'))
+
+        button3 = QPushButton('Tennis', self)
+        button3.setGeometry(100, 100, 150, 50)
+        button3.setIcon(QtGui.QIcon('tennis.png'))
+
+        hboxlayout.addWidget(button1)
+        hboxlayout.addWidget(button2)
+        hboxlayout.addWidget(button3)
+
+        self.groupbox.setLayout(hboxlayout)
+
+
 #
 App = QApplication(sys.argv)
 window = Window()

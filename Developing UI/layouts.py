@@ -1,11 +1,11 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QGroupBox, QHBoxLayout, QVBoxLayout
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QGroupBox, QHBoxLayout, QDialog
 from PyQt5 import QtGui
 from PyQt5 import QtCore
 
 
 # my class inherits from QMainWindow class
-class Window(QMainWindow):
+class Window(QDialog):
     def __init__(self):
         super(Window, self).__init__()
         self.title = 'PyQt Layout Demo'
@@ -23,29 +23,32 @@ class Window(QMainWindow):
         self.setWindowIcon(QtGui.QIcon(self.icon))
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
-        # create push button
+        # create layout button
         self.create_layout()
+        vboxlayout = QVBoxLayout()
+        vboxlayout.addWidget(self.groupbox)
+        self.setLayout(vboxlayout)
         # show the window
         self.show()
 
-    def create_button(self):
-        # button1 = QPushButton('Football', self)
-        # button1.setGeometry(100, 100, 150, 50)
-        # button1.setIcon(QtGui.QIcon('football-icon-png.png'))
-        #
-        # button2 = QPushButton('Cricket', self)
-        # button2.setGeometry(100, 100, 150, 50)
-        # button2.setIcon(QtGui.QIcon('cricket.png'))
-        #
-        # button3 = QPushButton('Tennis', self)
-        # button3.setGeometry(100, 100, 150, 50)
-        # button3.setIcon(QtGui.QIcon('tennis.png'))
-
-
-        # button1.clicked.connect(self.click_me)
-        # button2.clicked.connect(self.click_me)
-        # button2.clicked.connect(self.click_me)
-        None
+    # def create_button(self):
+    #     # button1 = QPushButton('Football', self)
+    #     # button1.setGeometry(100, 100, 150, 50)
+    #     # button1.setIcon(QtGui.QIcon('football-icon-png.png'))
+    #     #
+    #     # button2 = QPushButton('Cricket', self)
+    #     # button2.setGeometry(100, 100, 150, 50)
+    #     # button2.setIcon(QtGui.QIcon('cricket.png'))
+    #     #
+    #     # button3 = QPushButton('Tennis', self)
+    #     # button3.setGeometry(100, 100, 150, 50)
+    #     # button3.setIcon(QtGui.QIcon('tennis.png'))
+    #
+    #
+    #     # button1.clicked.connect(self.click_me)
+    #     # button2.clicked.connect(self.click_me)
+    #     # button2.clicked.connect(self.click_me)
+    #     None
 
     def click_me(self):
         print('Button has been clicked!')

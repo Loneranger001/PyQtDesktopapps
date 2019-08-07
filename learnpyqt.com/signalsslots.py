@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QFileDialog
+import os
 import sys
 from PyQt5 import QtGui
 from PyQt5.QtCore import Qt
@@ -13,6 +14,7 @@ class MainWindow(QMainWindow):
         label = QLabel('This is a label')
         label.setAlignment(Qt.AlignCenter)
         self.setCentralWidget(label)
+        self.createbuttons()
 
     # SLOT: This accepts a string and prints it
     def onwindowTitlechnage(self, s):
@@ -25,9 +27,33 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).contextMenuEvent(event)
 
 
+    def createbuttons(self):
+        pb_browse = QPushButton('Browse', self)
+        pb_browse.clicked.connect(self.getFile)
 
 
-app = QApplication([])
-window = MainWindow()
-window.show()
-sys.exit(app.exec_())
+    def getFile(self):
+        # path = os.path.join()
+        file = QFileDialog.getOpenFileName(self, 'Single File', 'C:\'', "Excel(*.xlsx *.xls)")
+        # this returns a tuple with full path
+        # print(file)
+        # Extracting the file name only
+        file_name = os.path.basename(file[0])
+        full_path = os.path.dirname(file[0])
+        print('File:' + file_name)
+        print('full_path:' + full_path)
+
+
+def main():
+    app = QApplication([])
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec_())
+
+
+# main section
+
+if __name__ == '__main__':
+    main()
+
+
